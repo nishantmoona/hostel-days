@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hostel Days | Engineering Memories</title>
+  <meta name="description" content="A dynamic hostel life memory website with photos, videos, music, filters, modal previews, and a beautiful engineering-days theme." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <audio id="bgMusic" src="assets/music/hostel-song.mp3" loop preload="none"></audio>
+
+  <div class="intro-screen" id="introScreen">
+    <div class="intro-card">
+      <span class="mini-label">Engineering Memories</span>
+      <h1>Hostel Days</h1>
+      <p>A digital scrapbook for the rooms, corridors, canteen nights, late submissions, birthday surprises, and people who became family.</p>
+      <button type="button" id="enterBtn">Enter Hostel Memories</button>
+    </div>
+  </div>
+
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+  <div class="bg-orb orb-three"></div>
+
+  <header class="topbar">
+    <a href="#home" class="brand"><span>HD</span><strong>Hostel Days</strong></a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#journey">Journey</a>
+      <a href="#streams">Streams</a>
+      <a href="#gallery">Memories</a>
+      <a href="#stories">Stories</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section reveal" id="home">
+      <div class="hero-copy">
+        <span class="eyebrow">Hostel Life · Engineering Days</span>
+        <h1>The days we lived in rooms, corridors, and memories.</h1>
+        <p>We came from different engineering streams, different cities, and different habits. But hostel life turned all of it into one bond — full of laughter, chaos, support, and stories we still remember.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn primary" id="musicBtn">Play Music</button>
+          <a class="btn secondary" href="#gallery">View Memories</a>
+          <button type="button" class="btn ghost" id="randomBtn">Random Memory</button>
+        </div>
+        <div class="stats-grid">
+          <div><strong>4+</strong><span>Years</span></div>
+          <div><strong>Many</strong><span>Branches</span></div>
+          <div><strong>∞</strong><span>Stories</span></div>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="photo-stack">
+          <figure class="stack-card card-one">
+            <img src="assets/photos/hero-1.jpg" alt="Hostel friends memory" loading="eager" onerror="this.src='assets/placeholders/hostel-photo.svg'">
+            <figcaption>Late nights, real bonds</figcaption>
+          </figure>
+          <figure class="stack-card card-two">
+            <img src="assets/photos/hero-2.jpg" alt="Engineering hostel memory" loading="lazy" onerror="this.src='assets/placeholders/hostel-photo.svg'">
+            <figcaption>Different streams, one hostel</figcaption>
+          </figure>
+          <figure class="stack-card card-three">
+            <img src="assets/photos/hero-3.jpg" alt="Hostel corridor memory" loading="lazy" onerror="this.src='assets/placeholders/hostel-photo.svg'">
+            <figcaption>Corridor stories</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-band reveal">
+      <p>“Hostel life was not just about staying away from home. It was about finding another home in people who started as strangers.”</p>
+    </section>
+
+    <section class="section reveal" id="journey">
+      <div class="section-head"><span>Our Journey</span><h2>From First Day Nervousness to Last Day Silence</h2></div>
+      <div class="timeline">
+        <article class="timeline-card"><span>01</span><h3>First Day</h3><p>New rooms, unknown faces, awkward introductions, and the beginning of lifelong stories.</p></article>
+        <article class="timeline-card"><span>02</span><h3>Hostel Routine</h3><p>Mess food, night walks, shared chargers, borrowed notes, group assignments, and endless jokes.</p></article>
+        <article class="timeline-card"><span>03</span><h3>Festival Nights</h3><p>Birthdays, celebrations, random plans, and memories made without needing anything perfect.</p></article>
+        <article class="timeline-card"><span>04</span><h3>Farewell</h3><p>The rooms emptied, but the bond stayed. The hostel became a chapter we still carry.</p></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="streams">
+      <div class="section-head"><span>Different Streams, Same Bond</span><h2>Branches Were Different. Hostel Was Common.</h2></div>
+      <div class="stream-grid">
+        <article><div class="stream-icon">⚙️</div><h3>Mechanical</h3><p>Late workshop stories, practical files, and problem-solving energy.</p></article>
+        <article><div class="stream-icon">💻</div><h3>Computer Science</h3><p>Code, projects, gaming nights, and last-minute debugging sessions.</p></article>
+        <article><div class="stream-icon">📡</div><h3>ECE / Electrical</h3><p>Circuits, labs, signals, and people who always had wires and ideas.</p></article>
+        <article><div class="stream-icon">🏗️</div><h3>Civil / Others</h3><p>Different departments, same canteen table, same hostel madness.</p></article>
+      </div>
+    </section>
+
+    <section class="featured reveal" id="featured">
+      <div class="featured-card">
+        <div><span class="mini-label">Featured Memory</span><h2 id="featuredTitle">Hostel Nights</h2><p id="featuredText">Some nights were ordinary then, but became priceless later.</p></div>
+        <button type="button" class="btn secondary" id="featuredBtn">Change Memory</button>
+      </div>
+    </section>
+
+    <section class="section reveal" id="gallery">
+      <div class="section-head">
+        <span>Memory Wall</span>
+        <h2>Photos, Videos, and Hostel Stories</h2>
+        <p>Add your own hostel photos and videos in the folders. The filters below will organize them automatically.</p>
+      </div>
+      <div class="filter-row" id="filterRow">
+        <button type="button" class="filter-btn active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="room">Room</button>
+        <button type="button" class="filter-btn" data-filter="corridor">Corridor</button>
+        <button type="button" class="filter-btn" data-filter="canteen">Canteen</button>
+        <button type="button" class="filter-btn" data-filter="festival">Festivals</button>
+        <button type="button" class="filter-btn" data-filter="trip">Trips</button>
+        <button type="button" class="filter-btn" data-filter="farewell">Farewell</button>
+        <button type="button" class="filter-btn" data-filter="video">Videos</button>
+      </div>
+      <div class="media-grid" id="mediaGrid"></div>
+    </section>
+
+    <section class="section reveal" id="stories">
+      <div class="section-head"><span>Hostel Notes</span><h2>Little Lines We Never Want to Forget</h2></div>
+      <div class="story-layout">
+        <div class="story-card"><h3>Roommates became family.</h3><p>A room was never just four walls. It was a place where people shared food, stress, dreams, secrets, and the small comfort of being understood.</p></div>
+        <div class="memory-note-box">
+          <h3>Add a small memory</h3>
+          <p>This saves only in your browser. It is useful while designing the website.</p>
+          <textarea id="memoryInput" placeholder="Write one hostel memory..."></textarea>
+          <button type="button" class="btn primary" id="saveMemoryBtn">Save Memory</button>
+          <div class="saved-notes" id="savedNotes"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="mediaModal" aria-hidden="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close media">×</button>
+      <div class="modal-content" id="modalContent"></div>
+      <p class="modal-caption" id="modalCaption"></p>
+    </div>
+  </div>
+
+  <footer class="footer"><p>Hostel Days · Engineering Memories</p><p class="footer-credit">Designed by Nishant Moona</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
