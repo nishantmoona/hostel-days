@@ -6,16 +6,19 @@
 
   /*
     IMAGE / VIDEO NAMING SYSTEM
+
     Keep your uploaded files exactly in these folders and names:
 
     assets/photos/hero/hero1.jpg ... hero10.jpg
     assets/photos/corridor-gang/corridor1.jpg ... corridor7.jpg
     assets/photos/birthday-night/birthday1.jpg ... birthday10.jpg
-    assets/photos/farewell/farewell1.jpg ... farewell10.jpg
+    assets/photos/farewell/farewell1.jpg ... farewell13.jpg
     assets/photos/function/function1.jpg ... function10.jpg
     assets/photos/hostel-induction/induction1.jpg ... induction3.jpg
-    assets/videos/video1.mp4 ... video4.mp4
-    assets/posters/video1.jpg ... video4.jpg
+    assets/photos/trip/trip1.jpg ... trip10.jpg
+
+    assets/videos/video1.mp4 ... video5.mp4
+    assets/posters/video1.jpg ... video5.jpg
   */
 
   const PHOTO_COUNTS = {
@@ -75,7 +78,10 @@
     "Memories Packed",
     "The Batch Bond",
     "Leaving the Rooms",
-    "Never Really Apart"
+    "Never Really Apart",
+    "Farewell Batch Memory",
+    "Last Hostel Gathering",
+    "A Chapter We Carry"
   ];
 
   const functionCaptions = [
@@ -98,18 +104,18 @@
   ];
 
   const tripCaptions = [
-  "Trip Diaries",
-  "The Road Gang",
-  "Travel Madness",
-  "Outside Campus Memories",
-  "Unplanned Adventure",
-  "Friends on the Move",
-  "Journey Together",
-  "Hostel Trip Energy",
-  "A Day to Remember",
-  "Forever Trip Memories"
-];
-  
+    "Trip Diaries",
+    "The Road Gang",
+    "Travel Madness",
+    "Outside Campus Memories",
+    "Unplanned Adventure",
+    "Friends on the Move",
+    "Journey Together",
+    "Hostel Trip Energy",
+    "A Day to Remember",
+    "Forever Trip Memories"
+  ];
+
   const videoCaptions = [
     "Hostel Motion Memory",
     "A Clip from the Days",
@@ -151,20 +157,21 @@
 
   function getMemoryText(category, caption) {
     const textMap = {
-  hero: "A highlight from the engineering hostel days that became part of the bigger story.",
-  corridor: "The corridor was more than a passage; it was where random plans and lifelong jokes began.",
-  birthday: "Hostel birthdays had their own chaos, noise, laughter, and unforgettable friendship.",
-  farewell: "A frame from the ending we did not want, but the memories stayed with us.",
-  function: "One of those college-function moments when everyone came together beyond branches and batches.",
-  induction: "The early days when strangers slowly became the hostel family.",
-  trip: "A trip memory from the days when friends, travel, laughter, and chaos became one story."
-};
+      hero: "A highlight from the engineering hostel days that became part of the bigger story.",
+      corridor: "The corridor was more than a passage; it was where random plans and lifelong jokes began.",
+      birthday: "Hostel birthdays had their own chaos, noise, laughter, and unforgettable friendship.",
+      farewell: "A frame from the ending we did not want, but the memories stayed with us.",
+      function: "One of those college-function moments when everyone came together beyond branches and batches.",
+      induction: "The early days when strangers slowly became the hostel family.",
+      trip: "A trip memory from the days when friends, travel, laughter, and chaos became one story."
+    };
 
     return textMap[category] || caption;
   }
 
   const HERO_PHOTOS = Array.from({ length: PHOTO_COUNTS.hero }, (_, index) => {
     const number = index + 1;
+
     return {
       src: `assets/photos/hero/hero${number}.jpg`,
       caption: heroCaptions[index] || `Hostel Memory ${number}`
@@ -180,6 +187,7 @@
       titlePrefix: "Hero Memory",
       captions: heroCaptions
     }),
+
     ...createPhotoSeries({
       category: "corridor",
       folder: "corridor-gang",
@@ -188,6 +196,7 @@
       titlePrefix: "Corridor Memory",
       captions: corridorCaptions
     }),
+
     ...createPhotoSeries({
       category: "birthday",
       folder: "birthday-night",
@@ -196,6 +205,7 @@
       titlePrefix: "Birthday Memory",
       captions: birthdayCaptions
     }),
+
     ...createPhotoSeries({
       category: "farewell",
       folder: "farewell",
@@ -204,6 +214,7 @@
       titlePrefix: "Farewell Memory",
       captions: farewellCaptions
     }),
+
     ...createPhotoSeries({
       category: "function",
       folder: "function",
@@ -212,6 +223,7 @@
       titlePrefix: "Function Memory",
       captions: functionCaptions
     }),
+
     ...createPhotoSeries({
       category: "induction",
       folder: "hostel-induction",
@@ -220,24 +232,48 @@
       titlePrefix: "Induction Memory",
       captions: inductionCaptions
     }),
+
     ...createPhotoSeries({
-  category: "trip",
-  folder: "trip",
-  prefix: "trip",
-  count: PHOTO_COUNTS.trip,
-  titlePrefix: "Trip Memory",
-  captions: tripCaptions
-}),
+      category: "trip",
+      folder: "trip",
+      prefix: "trip",
+      count: PHOTO_COUNTS.trip,
+      titlePrefix: "Trip Memory",
+      captions: tripCaptions
+    }),
+
     ...createVideoSeries(PHOTO_COUNTS.video)
   ];
 
   const featuredMemories = [
-    { title: "Corridor Gang", text: "The corridor was never just a corridor. It was our meeting point, discussion room, comedy stage, and stress-relief zone." },
-    { title: "Birthday Night", text: "Hostel birthdays were loud, chaotic, imperfect, and somehow more special than any planned celebration." },
-    { title: "Farewell Frames", text: "The farewell pictures carried smiles, but everyone knew a chapter was closing." },
-    { title: "Function Days", text: "Events and functions brought everyone together beyond branches, schedules, and assignments." },
-    { title: "Hostel Induction", text: "The first few photos captured strangers who would soon become part of each other's everyday life." },
-    { title: "Video Memories", text: "Some memories need movement, voices, and background noise to feel complete again." }
+    {
+      title: "Corridor Gang",
+      text: "The corridor was never just a corridor. It was our meeting point, discussion room, comedy stage, and stress-relief zone."
+    },
+    {
+      title: "Birthday Night",
+      text: "Hostel birthdays were loud, chaotic, imperfect, and somehow more special than any planned celebration."
+    },
+    {
+      title: "Farewell Frames",
+      text: "The farewell pictures carried smiles, but everyone knew a chapter was closing."
+    },
+    {
+      title: "Function Days",
+      text: "Events and functions brought everyone together beyond branches, schedules, and assignments."
+    },
+    {
+      title: "Hostel Induction",
+      text: "The first few photos captured strangers who would soon become part of each other's everyday life."
+    },
+    {
+      title: "Trip Memories",
+      text: "Trips gave the hostel bond a different background — roads, places, laughter, and stories outside campus."
+    },
+    {
+      title: "Video Memories",
+      text: "Some memories need movement, voices, and background noise to feel complete again."
+    }
   ];
 
   let currentFeatured = 0;
@@ -247,50 +283,61 @@
   function initIntro() {
     const intro = $("#introScreen");
     const enterBtn = $("#enterBtn");
+
     if (!intro || !enterBtn) return;
 
     document.body.style.overflow = "hidden";
+
     enterBtn.addEventListener("click", () => {
       intro.classList.add("hide");
       document.body.style.overflow = "";
-      setTimeout(() => intro.remove(), 800);
+
+      setTimeout(() => {
+        intro.remove();
+      }, 800);
+
       revealVisibleSections();
     });
   }
 
   function initNavigation() {
-  const navToggle = $("#navToggle");
-  const navLinks = $("#navLinks");
-  if (!navToggle || !navLinks) return;
+    const navToggle = $("#navToggle");
+    const navLinks = $("#navLinks");
 
-  navToggle.addEventListener("click", () => {
-    const isOpen = navLinks.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-  });
+    if (!navToggle || !navLinks) return;
 
-  $$("#navLinks a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
     });
-  });
-}
+
+    $$("#navLinks a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
 
   function initReveal() {
     const revealEls = $$(".reveal");
+
     if (!("IntersectionObserver" in window)) {
       revealEls.forEach((el) => el.classList.add("in"));
       return;
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
     revealEls.forEach((el) => observer.observe(el));
   }
@@ -298,12 +345,16 @@
   function revealVisibleSections() {
     $$(".reveal").forEach((el) => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) el.classList.add("in");
+
+      if (rect.top < window.innerHeight) {
+        el.classList.add("in");
+      }
     });
   }
 
   function initHeroRotator() {
     const cards = $$(".photo-stack .stack-card");
+
     if (!cards.length || !HERO_PHOTOS.length) return;
 
     function setHeroCards() {
@@ -315,9 +366,16 @@
         if (image) {
           image.src = memory.src;
           image.alt = memory.caption;
+
+          image.onerror = () => {
+            image.onerror = null;
+            image.src = "assets/placeholders/hostel-photo.svg";
+          };
         }
 
-        if (caption) caption.textContent = memory.caption;
+        if (caption) {
+          caption.textContent = memory.caption;
+        }
       });
     }
 
@@ -334,9 +392,11 @@
   function initMusic() {
     const music = $("#bgMusic");
     const musicBtn = $("#musicBtn");
+
     if (!music || !musicBtn) return;
 
     music.volume = 0.45;
+
     musicBtn.addEventListener("click", () => {
       if (isMusicPlaying) {
         music.pause();
@@ -345,72 +405,78 @@
         return;
       }
 
-      music.play().then(() => {
-        isMusicPlaying = true;
-        musicBtn.textContent = "Pause Music";
-      }).catch(() => {
-        musicBtn.textContent = "Play Music";
-        console.log("Music can play only after a user interaction.");
-      });
+      music
+        .play()
+        .then(() => {
+          isMusicPlaying = true;
+          musicBtn.textContent = "Pause Music";
+        })
+        .catch(() => {
+          musicBtn.textContent = "Play Music";
+          console.log("Music can play only after a user interaction.");
+        });
     });
   }
 
   function createMediaCard(item) {
-  const card = document.createElement("article");
-  card.className = "media-card";
+    const card = document.createElement("article");
+    card.className = "media-card";
 
-  if (item.fit === "contain") {
-    card.classList.add("contain");
-  }
+    if (item.fit === "contain") {
+      card.classList.add("contain");
+    }
 
-  card.dataset.category = item.category;
-  card.dataset.type = item.type;
+    card.dataset.category = item.category;
+    card.dataset.type = item.type;
 
-  const thumb = document.createElement("img");
-  thumb.className = "media-thumb";
-  thumb.loading = "lazy";
-  thumb.alt = item.title;
-  thumb.src = item.type === "video"
-    ? (item.poster || "assets/placeholders/hostel-video.svg")
-    : item.src;
-
-  thumb.addEventListener("error", () => {
+    const thumb = document.createElement("img");
+    thumb.className = "media-thumb";
+    thumb.loading = "lazy";
+    thumb.alt = item.title;
     thumb.src = item.type === "video"
-      ? "assets/placeholders/hostel-video.svg"
-      : "assets/placeholders/hostel-photo.svg";
-  });
+      ? item.poster || "assets/placeholders/hostel-video.svg"
+      : item.src;
 
-  const badge = document.createElement("span");
-  badge.className = "media-badge";
-  badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
+    thumb.addEventListener("error", () => {
+      if (thumb.dataset.fallbackApplied === "true") return;
 
-  const caption = document.createElement("div");
-  caption.className = "media-caption";
+      thumb.dataset.fallbackApplied = "true";
+      thumb.src = item.type === "video"
+        ? "assets/placeholders/hostel-video.svg"
+        : "assets/placeholders/hostel-photo.svg";
+    });
 
-  const title = document.createElement("h3");
-  title.textContent = item.title;
+    const badge = document.createElement("span");
+    badge.className = "media-badge";
+    badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
 
-  const text = document.createElement("p");
-  text.textContent = item.text;
+    const caption = document.createElement("div");
+    caption.className = "media-caption";
 
-  caption.appendChild(title);
-  caption.appendChild(text);
+    const title = document.createElement("h3");
+    title.textContent = item.title;
 
-  card.appendChild(thumb);
-  card.appendChild(badge);
+    const text = document.createElement("p");
+    text.textContent = item.text;
 
-  if (item.type === "video") {
-    const play = document.createElement("span");
-    play.className = "play-badge";
-    play.textContent = "▶";
-    card.appendChild(play);
+    caption.appendChild(title);
+    caption.appendChild(text);
+
+    card.appendChild(thumb);
+    card.appendChild(badge);
+
+    if (item.type === "video") {
+      const play = document.createElement("span");
+      play.className = "play-badge";
+      play.textContent = "▶";
+      card.appendChild(play);
+    }
+
+    card.appendChild(caption);
+    card.addEventListener("click", () => openModal(item));
+
+    return card;
   }
-
-  card.appendChild(caption);
-  card.addEventListener("click", () => openModal(item));
-
-  return card;
-}
 
   function getCategoryLabel(category) {
     const labels = {
@@ -429,15 +495,26 @@
 
   function renderGallery(filter = "all") {
     const grid = $("#mediaGrid");
-    if (!grid) return;
+
+    if (!grid) {
+      console.warn("mediaGrid was not found in HTML.");
+      return;
+    }
 
     grid.innerHTML = "";
-    const filtered = filter === "all" ? mediaItems : mediaItems.filter((item) => item.category === filter || item.type === filter);
-    filtered.forEach((item) => grid.appendChild(createMediaCard(item)));
+
+    const filtered = filter === "all"
+      ? mediaItems
+      : mediaItems.filter((item) => item.category === filter || item.type === filter);
+
+    filtered.forEach((item) => {
+      grid.appendChild(createMediaCard(item));
+    });
   }
 
   function initFilters() {
     const buttons = $$(".filter-btn");
+
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         buttons.forEach((btn) => btn.classList.remove("active"));
@@ -445,61 +522,70 @@
         renderGallery(button.dataset.filter);
       });
     });
+
     renderGallery("all");
   }
 
   function openModal(item) {
-  const modal = $("#mediaModal");
-  const modalContent = $("#modalContent");
-  const modalCaption = $("#modalCaption");
-  if (!modal || !modalContent || !modalCaption) return;
+    const modal = $("#mediaModal");
+    const modalContent = $("#modalContent");
+    const modalCaption = $("#modalCaption");
 
-  modalContent.innerHTML = "";
+    if (!modal || !modalContent || !modalCaption) return;
 
-  if (item.type === "video") {
-    const music = $("#bgMusic");
+    modalContent.innerHTML = "";
 
-    if (music && !music.paused) {
-      music.pause();
-      isMusicPlaying = false;
+    if (item.type === "video") {
+      const music = $("#bgMusic");
 
-      const musicBtn = $("#musicBtn");
-      if (musicBtn) musicBtn.textContent = "Play Music";
+      if (music && !music.paused) {
+        music.pause();
+        isMusicPlaying = false;
+
+        const musicBtn = $("#musicBtn");
+        if (musicBtn) {
+          musicBtn.textContent = "Play Music";
+        }
+      }
+
+      const video = document.createElement("video");
+      video.src = item.src;
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = "metadata";
+
+      if (item.poster) {
+        video.poster = item.poster;
+      }
+
+      modalContent.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.title;
+
+      img.addEventListener("error", () => {
+        if (img.dataset.fallbackApplied === "true") return;
+
+        img.dataset.fallbackApplied = "true";
+        img.src = "assets/placeholders/hostel-photo.svg";
+      });
+
+      modalContent.appendChild(img);
     }
 
-    const video = document.createElement("video");
-    video.src = item.src;
-    video.controls = true;
-    video.playsInline = true;
-    video.preload = "metadata";
-
-    if (item.poster) {
-      video.poster = item.poster;
-    }
-
-    modalContent.appendChild(video);
-  } else {
-    const img = document.createElement("img");
-    img.src = item.src;
-    img.alt = item.title;
-
-    img.addEventListener("error", () => {
-      img.src = "assets/placeholders/hostel-photo.svg";
-    });
-
-    modalContent.appendChild(img);
+    modalCaption.textContent = `${item.title} — ${item.text}`;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
-
-  modalCaption.textContent = `${item.title} — ${item.text}`;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
 
   function closeModal() {
     const modal = $("#mediaModal");
     const modalContent = $("#modalContent");
+
     if (!modal || !modalContent) return;
+
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     modalContent.innerHTML = "";
@@ -509,9 +595,24 @@
   function initModal() {
     const modal = $("#mediaModal");
     const close = $("#modalClose");
-    if (close) close.addEventListener("click", closeModal);
-    if (modal) modal.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
-    document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeModal(); });
+
+    if (close) {
+      close.addEventListener("click", closeModal);
+    }
+
+    if (modal) {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    });
   }
 
   function initFeatured() {
@@ -522,8 +623,14 @@
 
     function updateFeatured() {
       const memory = featuredMemories[currentFeatured];
-      if (title) title.textContent = memory.title;
-      if (text) text.textContent = memory.text;
+
+      if (title) {
+        title.textContent = memory.title;
+      }
+
+      if (text) {
+        text.textContent = memory.text;
+      }
     }
 
     function nextFeatured() {
@@ -531,8 +638,14 @@
       updateFeatured();
     }
 
-    if (button) button.addEventListener("click", nextFeatured);
-    if (randomBtn) randomBtn.addEventListener("click", nextFeatured);
+    if (button) {
+      button.addEventListener("click", nextFeatured);
+    }
+
+    if (randomBtn) {
+      randomBtn.addEventListener("click", nextFeatured);
+    }
+
     updateFeatured();
   }
 
@@ -540,32 +653,47 @@
     const input = $("#memoryInput");
     const saveBtn = $("#saveMemoryBtn");
     const notesWrap = $("#savedNotes");
+
     if (!input || !saveBtn || !notesWrap) return;
 
     function getNotes() {
-      try { return JSON.parse(localStorage.getItem("hostelMemoryNotes") || "[]"); }
-      catch { return []; }
+      try {
+        return JSON.parse(localStorage.getItem("hostelMemoryNotes") || "[]");
+      } catch {
+        return [];
+      }
     }
 
-    function setNotes(notes) { localStorage.setItem("hostelMemoryNotes", JSON.stringify(notes)); }
+    function setNotes(notes) {
+      localStorage.setItem("hostelMemoryNotes", JSON.stringify(notes));
+    }
 
     function renderNotes() {
       const notes = getNotes();
+
       notesWrap.innerHTML = "";
-      notes.slice().reverse().forEach((note) => {
-        const div = document.createElement("div");
-        div.className = "saved-note";
-        div.textContent = note;
-        notesWrap.appendChild(div);
-      });
+
+      notes
+        .slice()
+        .reverse()
+        .forEach((note) => {
+          const div = document.createElement("div");
+          div.className = "saved-note";
+          div.textContent = note;
+          notesWrap.appendChild(div);
+        });
     }
 
     saveBtn.addEventListener("click", () => {
       const text = input.value.trim();
+
       if (!text) return;
+
       const notes = getNotes();
+
       notes.push(text);
       setNotes(notes);
+
       input.value = "";
       renderNotes();
     });
