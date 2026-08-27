@@ -134,5 +134,6 @@ script.js
 assets/
 README.md
 ```
+Updated farewell photos
 
 Then enable GitHub Pages from repository settings.
