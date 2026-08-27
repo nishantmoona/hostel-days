@@ -22,9 +22,10 @@
     hero: 10,
     corridor: 7,
     birthday: 10,
-    farewell: 10,
+    farewell: 13,
     function: 10,
     induction: 3,
+    trip: 10,
     video: 4
   };
 
@@ -96,6 +97,19 @@
     "The Start of Everything"
   ];
 
+  const tripCaptions = [
+  "Trip Diaries",
+  "The Road Gang",
+  "Travel Madness",
+  "Outside Campus Memories",
+  "Unplanned Adventure",
+  "Friends on the Move",
+  "Journey Together",
+  "Hostel Trip Energy",
+  "A Day to Remember",
+  "Forever Trip Memories"
+];
+  
   const videoCaptions = [
     "Hostel Motion Memory",
     "A Clip from the Days",
@@ -136,13 +150,14 @@
 
   function getMemoryText(category, caption) {
     const textMap = {
-      hero: "A highlight from the engineering hostel days that became part of the bigger story.",
-      corridor: "The corridor was more than a passage; it was where random plans and lifelong jokes began.",
-      birthday: "Hostel birthdays had their own chaos, noise, laughter, and unforgettable friendship.",
-      farewell: "A frame from the ending we did not want, but the memories stayed with us.",
-      function: "One of those college-function moments when everyone came together beyond branches and batches.",
-      induction: "The early days when strangers slowly became the hostel family."
-    };
+  hero: "A highlight from the engineering hostel days that became part of the bigger story.",
+  corridor: "The corridor was more than a passage; it was where random plans and lifelong jokes began.",
+  birthday: "Hostel birthdays had their own chaos, noise, laughter, and unforgettable friendship.",
+  farewell: "A frame from the ending we did not want, but the memories stayed with us.",
+  function: "One of those college-function moments when everyone came together beyond branches and batches.",
+  induction: "The early days when strangers slowly became the hostel family.",
+  trip: "A trip memory from the days when friends, travel, laughter, and chaos became one story."
+};
 
     return textMap[category] || caption;
   }
@@ -204,6 +219,14 @@
       titlePrefix: "Induction Memory",
       captions: inductionCaptions
     }),
+    ...createPhotoSeries({
+  category: "trip",
+  folder: "trip",
+  prefix: "trip",
+  count: PHOTO_COUNTS.trip,
+  titlePrefix: "Trip Memory",
+  captions: tripCaptions
+}),
     ...createVideoSeries(PHOTO_COUNTS.video)
   ];
 
@@ -396,6 +419,7 @@
       farewell: "Farewell",
       function: "Function",
       induction: "Induction",
+      trip: "Trip",
       video: "Video"
     };
 
