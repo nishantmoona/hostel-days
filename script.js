@@ -235,13 +235,22 @@
   }
 
   function initNavigation() {
-    const navToggle = $("#navToggle");
-    const navLinks = $("#navLinks");
-    if (!navToggle || !navLinks) return;
+  const navToggle = $("#navToggle");
+  const navLinks = $("#navLinks");
+  if (!navToggle || !navLinks) return;
 
-    navToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-    $$("#navLinks a").forEach((link) => link.addEventListener("click", () => navLinks.classList.remove("open")));
-  }
+  navToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  $$("#navLinks a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
   function initReveal() {
     const revealEls = $$(".reveal");
@@ -323,43 +332,61 @@
   }
 
   function createMediaCard(item) {
-    const card = document.createElement("article");
-    card.className = "media-card";
-    if (item.fit === "contain") card.classList.add("contain");
-    card.dataset.category = item.category;
-    card.dataset.type = item.type;
+  const card = document.createElement("article");
+  card.className = "media-card";
 
-    const thumb = document.createElement("img");
-    thumb.className = "media-thumb";
-    thumb.loading = "lazy";
-    thumb.alt = item.title;
-    thumb.src = item.type === "video" ? (item.poster || "assets/placeholders/hostel-video.svg") : item.src;
-    thumb.addEventListener("error", () => {
-      thumb.src = item.type === "video" ? "assets/placeholders/hostel-video.svg" : "assets/placeholders/hostel-photo.svg";
-    });
-
-    const badge = document.createElement("span");
-    badge.className = "media-badge";
-    badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
-
-    const caption = document.createElement("div");
-    caption.className = "media-caption";
-    caption.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p>`;
-
-    card.appendChild(thumb);
-    card.appendChild(badge);
-
-    if (item.type === "video") {
-      const play = document.createElement("span");
-      play.className = "play-badge";
-      play.textContent = "▶";
-      card.appendChild(play);
-    }
-
-    card.appendChild(caption);
-    card.addEventListener("click", () => openModal(item));
-    return card;
+  if (item.fit === "contain") {
+    card.classList.add("contain");
   }
+
+  card.dataset.category = item.category;
+  card.dataset.type = item.type;
+
+  const thumb = document.createElement("img");
+  thumb.className = "media-thumb";
+  thumb.loading = "lazy";
+  thumb.alt = item.title;
+  thumb.src = item.type === "video"
+    ? (item.poster || "assets/placeholders/hostel-video.svg")
+    : item.src;
+
+  thumb.addEventListener("error", () => {
+    thumb.src = item.type === "video"
+      ? "assets/placeholders/hostel-video.svg"
+      : "assets/placeholders/hostel-photo.svg";
+  });
+
+  const badge = document.createElement("span");
+  badge.className = "media-badge";
+  badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
+
+  const caption = document.createElement("div");
+  caption.className = "media-caption";
+
+  const title = document.createElement("h3");
+  title.textContent = item.title;
+
+  const text = document.createElement("p");
+  text.textContent = item.text;
+
+  caption.appendChild(title);
+  caption.appendChild(text);
+
+  card.appendChild(thumb);
+  card.appendChild(badge);
+
+  if (item.type === "video") {
+    const play = document.createElement("span");
+    play.className = "play-badge";
+    play.textContent = "▶";
+    card.appendChild(play);
+  }
+
+  card.appendChild(caption);
+  card.addEventListener("click", () => openModal(item));
+
+  return card;
+}
 
   function getCategoryLabel(category) {
     const labels = {
@@ -397,33 +424,52 @@
   }
 
   function openModal(item) {
-    const modal = $("#mediaModal");
-    const modalContent = $("#modalContent");
-    const modalCaption = $("#modalCaption");
-    if (!modal || !modalContent || !modalCaption) return;
+  const modal = $("#mediaModal");
+  const modalContent = $("#modalContent");
+  const modalCaption = $("#modalCaption");
+  if (!modal || !modalContent || !modalCaption) return;
 
-    modalContent.innerHTML = "";
-    if (item.type === "video") {
-      const video = document.createElement("video");
-      video.src = item.src;
-      video.controls = true;
-      video.playsInline = true;
-      video.preload = "metadata";
-      if (item.poster) video.poster = item.poster;
-      modalContent.appendChild(video);
-    } else {
-      const img = document.createElement("img");
-      img.src = item.src;
-      img.alt = item.title;
-      img.addEventListener("error", () => { img.src = "assets/placeholders/hostel-photo.svg"; });
-      modalContent.appendChild(img);
+  modalContent.innerHTML = "";
+
+  if (item.type === "video") {
+    const music = $("#bgMusic");
+
+    if (music && !music.paused) {
+      music.pause();
+      isMusicPlaying = false;
+
+      const musicBtn = $("#musicBtn");
+      if (musicBtn) musicBtn.textContent = "Play Music";
     }
 
-    modalCaption.textContent = `${item.title} — ${item.text}`;
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    const video = document.createElement("video");
+    video.src = item.src;
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = "metadata";
+
+    if (item.poster) {
+      video.poster = item.poster;
+    }
+
+    modalContent.appendChild(video);
+  } else {
+    const img = document.createElement("img");
+    img.src = item.src;
+    img.alt = item.title;
+
+    img.addEventListener("error", () => {
+      img.src = "assets/placeholders/hostel-photo.svg";
+    });
+
+    modalContent.appendChild(img);
   }
+
+  modalCaption.textContent = `${item.title} — ${item.text}`;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
 
   function closeModal() {
     const modal = $("#mediaModal");
