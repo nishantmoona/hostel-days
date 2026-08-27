@@ -26,7 +26,7 @@
     function: 10,
     induction: 3,
     trip: 10,
-    video: 4
+    video: 5
   };
 
   const heroCaptions = [
@@ -114,7 +114,8 @@
     "Hostel Motion Memory",
     "A Clip from the Days",
     "Living the Moment",
-    "The Bond in Motion"
+    "The Bond in Motion",
+    "One More Hostellers Party"
   ];
 
   function createPhotoSeries({ category, folder, prefix, count, titlePrefix, captions }) {
