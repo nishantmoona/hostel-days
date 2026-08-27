@@ -2,21 +2,23 @@
 
 A dynamic static website for celebrating engineering hostel life with photos, videos, music, filters, modal previews, memory notes, and a warm scrapbook-style design.
 
-## Features
+## Current Media Setup
 
-- Opening screen
-- Music play/pause button
-- Responsive mobile navigation
-- Hostel journey timeline
-- Engineering streams section
-- Dynamic photo and video memory wall
-- Category filters
-- Photo/video modal preview
-- Random featured memory
-- Local browser memory notes
-- Fully responsive layout for mobile, tablet, and desktop
+This version is configured for:
 
-## Folder Structure
+```text
+Hero photos: 10
+Corridor Gang photos: 7
+Birthday Night photos: 10
+Farewell photos: 10
+Function photos: 10
+Hostel Induction photos: 3
+Videos: 4
+```
+
+## Folder Structure and Exact File Names
+
+Use this exact structure and naming pattern:
 
 ```text
 hostel-days-website/
@@ -26,64 +28,86 @@ hostel-days-website/
 ├── README.md
 └── assets/
     ├── photos/
+    │   ├── hero/
+    │   │   ├── hero1.jpg
+    │   │   ├── hero2.jpg
+    │   │   └── hero10.jpg
+    │   ├── corridor-gang/
+    │   │   ├── corridor1.jpg
+    │   │   └── corridor7.jpg
+    │   ├── birthday-night/
+    │   │   ├── birthday1.jpg
+    │   │   └── birthday10.jpg
+    │   ├── farewell/
+    │   │   ├── farewell1.jpg
+    │   │   └── farewell10.jpg
+    │   ├── function/
+    │   │   ├── function1.jpg
+    │   │   └── function10.jpg
+    │   └── hostel-induction/
+    │       ├── induction1.jpg
+    │       ├── induction2.jpg
+    │       └── induction3.jpg
     ├── videos/
+    │   ├── video1.mp4
+    │   ├── video2.mp4
+    │   ├── video3.mp4
+    │   └── video4.mp4
     ├── posters/
+    │   ├── video1.jpg
+    │   ├── video2.jpg
+    │   ├── video3.jpg
+    │   └── video4.jpg
     ├── music/
+    │   └── hostel-song.mp3
     └── placeholders/
 ```
 
-## Add Photos
+## Important Naming Rule
 
-Put photos inside:
+GitHub Pages is case-sensitive. These are different file names:
 
 ```text
-assets/photos/
+hero1.jpg
+Hero1.jpg
+hero1.JPG
+hero 1.jpg
 ```
 
-Then edit `mediaItems` in `script.js`:
+The code uses lowercase `.jpg`, so rename your files exactly as shown above.
+
+## Features
+
+- Opening screen
+- Music play/pause button
+- Rotating 10-image hero photo stack
+- Responsive mobile navigation
+- Hostel journey timeline
+- Engineering streams section
+- Dynamic photo and video memory wall
+- Filters for all media categories
+- Click-to-enlarge photo/video modal preview
+- Random featured memory button
+- Local browser memory notes
+- Fully responsive layout for mobile, tablet, and desktop
+
+## Add More Photos Later
+
+Open `script.js` and update `PHOTO_COUNTS`:
 
 ```javascript
-{
-  type: "photo",
-  category: "room",
-  src: "assets/photos/your-photo.jpg",
-  title: "Room Memories",
-  text: "A short caption about this memory."
-}
+const PHOTO_COUNTS = {
+  hero: 10,
+  corridor: 7,
+  birthday: 10,
+  farewell: 10,
+  function: 10,
+  induction: 3,
+  video: 4
+};
 ```
 
-Available categories:
-
-```text
-room, corridor, canteen, festival, trip, farewell
-```
-
-## Add Videos
-
-Put videos in:
-
-```text
-assets/videos/
-```
-
-Put poster images in:
-
-```text
-assets/posters/
-```
-
-Then edit `mediaItems`:
-
-```javascript
-{
-  type: "video",
-  category: "video",
-  src: "assets/videos/your-video.mp4",
-  poster: "assets/posters/your-video-poster.jpg",
-  title: "Hostel Video",
-  text: "A short caption about this video."
-}
-```
+Then add matching files in the correct folder.
 
 ## Add Music
 

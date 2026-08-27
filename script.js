@@ -4,27 +4,221 @@
   const $ = (selector, context = document) => context.querySelector(selector);
   const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
 
+  /*
+    IMAGE / VIDEO NAMING SYSTEM
+    Keep your uploaded files exactly in these folders and names:
+
+    assets/photos/hero/hero1.jpg ... hero10.jpg
+    assets/photos/corridor-gang/corridor1.jpg ... corridor7.jpg
+    assets/photos/birthday-night/birthday1.jpg ... birthday10.jpg
+    assets/photos/farewell/farewell1.jpg ... farewell10.jpg
+    assets/photos/function/function1.jpg ... function10.jpg
+    assets/photos/hostel-induction/induction1.jpg ... induction3.jpg
+    assets/videos/video1.mp4 ... video4.mp4
+    assets/posters/video1.jpg ... video4.jpg
+  */
+
+  const PHOTO_COUNTS = {
+    hero: 10,
+    corridor: 7,
+    birthday: 10,
+    farewell: 10,
+    function: 10,
+    induction: 3,
+    video: 4
+  };
+
+  const heroCaptions = [
+    "The Beginning",
+    "Hostel Family",
+    "Engineering Days",
+    "Room to Memories",
+    "Same Madness",
+    "Unplanned Moments",
+    "The Hostel Gang",
+    "Late Night Energy",
+    "Days Worth Remembering",
+    "Forever Hostel Days"
+  ];
+
+  const corridorCaptions = [
+    "Corridor Gang",
+    "Hostel Walks",
+    "Random Gatherings",
+    "Everyday Chaos",
+    "Outside the Rooms",
+    "Laughing Loud",
+    "The Real Hostel Vibe"
+  ];
+
+  const birthdayCaptions = [
+    "Birthday Madness",
+    "Cake and Chaos",
+    "Midnight Surprise",
+    "Hostel Celebration",
+    "Friends Like Family",
+    "Loudest Night",
+    "Unforgettable Smiles",
+    "Birthday Squad",
+    "One More Memory",
+    "Celebration Mode"
+  ];
+
+  const farewellCaptions = [
+    "The Last Day",
+    "Final Hostel Frame",
+    "Goodbyes Were Hard",
+    "End of an Era",
+    "Smiles and Silence",
+    "One Last Picture",
+    "Memories Packed",
+    "The Batch Bond",
+    "Leaving the Rooms",
+    "Never Really Apart"
+  ];
+
+  const functionCaptions = [
+    "Function Night",
+    "Stage Memories",
+    "Celebration Lights",
+    "College Energy",
+    "The Event Gang",
+    "Dressed Up Days",
+    "Big Day Vibes",
+    "Together in Frame",
+    "Festive Mood",
+    "Golden Evening"
+  ];
+
+  const inductionCaptions = [
+    "First Hostel Days",
+    "New Faces",
+    "The Start of Everything"
+  ];
+
+  const videoCaptions = [
+    "Hostel Motion Memory",
+    "A Clip from the Days",
+    "Living the Moment",
+    "The Bond in Motion"
+  ];
+
+  function createPhotoSeries({ category, folder, prefix, count, titlePrefix, captions }) {
+    return Array.from({ length: count }, (_, index) => {
+      const number = index + 1;
+      const caption = captions[index] || `${titlePrefix} ${number}`;
+
+      return {
+        type: "photo",
+        category,
+        src: `assets/photos/${folder}/${prefix}${number}.jpg`,
+        title: caption,
+        text: getMemoryText(category, caption)
+      };
+    });
+  }
+
+  function createVideoSeries(count) {
+    return Array.from({ length: count }, (_, index) => {
+      const number = index + 1;
+      const caption = videoCaptions[index] || `Hostel Video ${number}`;
+
+      return {
+        type: "video",
+        category: "video",
+        src: `assets/videos/video${number}.mp4`,
+        poster: `assets/posters/video${number}.jpg`,
+        title: caption,
+        text: "A moving piece of hostel life that keeps the feeling alive."
+      };
+    });
+  }
+
+  function getMemoryText(category, caption) {
+    const textMap = {
+      hero: "A highlight from the engineering hostel days that became part of the bigger story.",
+      corridor: "The corridor was more than a passage; it was where random plans and lifelong jokes began.",
+      birthday: "Hostel birthdays had their own chaos, noise, laughter, and unforgettable friendship.",
+      farewell: "A frame from the ending we did not want, but the memories stayed with us.",
+      function: "One of those college-function moments when everyone came together beyond branches and batches.",
+      induction: "The early days when strangers slowly became the hostel family."
+    };
+
+    return textMap[category] || caption;
+  }
+
+  const HERO_PHOTOS = Array.from({ length: PHOTO_COUNTS.hero }, (_, index) => {
+    const number = index + 1;
+    return {
+      src: `assets/photos/hero/hero${number}.jpg`,
+      caption: heroCaptions[index] || `Hostel Memory ${number}`
+    };
+  });
+
   const mediaItems = [
-    { type: "photo", category: "room", src: "assets/photos/room-night.jpg", title: "Room 302 Nights", text: "The room where plans, jokes, and engineering stress lived together." },
-    { type: "photo", category: "corridor", src: "assets/photos/corridor-gang.jpg", title: "Corridor Gang", text: "The corridor was never empty when friends were around." },
-    { type: "photo", category: "canteen", src: "assets/photos/canteen-table.jpg", title: "Canteen Table", text: "Average food, unforgettable conversations." },
-    { type: "photo", category: "festival", src: "assets/photos/birthday-night.jpg", title: "Birthday Madness", text: "Hostel birthdays had their own rules and their own chaos." },
-    { type: "photo", category: "trip", src: "assets/photos/trip-memory.jpg", title: "One Random Trip", text: "The best plans were usually made at the last minute." },
-    { type: "photo", category: "farewell", src: "assets/photos/farewell-day.jpg", title: "The Last Day", text: "The day everyone smiled for pictures and quietly felt the ending." },
-    { type: "video", category: "video", src: "assets/videos/hostel-video-1.mp4", poster: "assets/posters/hostel-video-1.jpg", title: "Hostel Video Memory", text: "A short clip from the days that still feel close." },
-    { type: "video", category: "video", src: "assets/videos/hostel-video-2.mp4", poster: "assets/posters/hostel-video-2.jpg", title: "Late Night Clip", text: "Some clips are blurry, but the feeling is clear." }
+    ...createPhotoSeries({
+      category: "hero",
+      folder: "hero",
+      prefix: "hero",
+      count: PHOTO_COUNTS.hero,
+      titlePrefix: "Hero Memory",
+      captions: heroCaptions
+    }),
+    ...createPhotoSeries({
+      category: "corridor",
+      folder: "corridor-gang",
+      prefix: "corridor",
+      count: PHOTO_COUNTS.corridor,
+      titlePrefix: "Corridor Memory",
+      captions: corridorCaptions
+    }),
+    ...createPhotoSeries({
+      category: "birthday",
+      folder: "birthday-night",
+      prefix: "birthday",
+      count: PHOTO_COUNTS.birthday,
+      titlePrefix: "Birthday Memory",
+      captions: birthdayCaptions
+    }),
+    ...createPhotoSeries({
+      category: "farewell",
+      folder: "farewell",
+      prefix: "farewell",
+      count: PHOTO_COUNTS.farewell,
+      titlePrefix: "Farewell Memory",
+      captions: farewellCaptions
+    }),
+    ...createPhotoSeries({
+      category: "function",
+      folder: "function",
+      prefix: "function",
+      count: PHOTO_COUNTS.function,
+      titlePrefix: "Function Memory",
+      captions: functionCaptions
+    }),
+    ...createPhotoSeries({
+      category: "induction",
+      folder: "hostel-induction",
+      prefix: "induction",
+      count: PHOTO_COUNTS.induction,
+      titlePrefix: "Induction Memory",
+      captions: inductionCaptions
+    }),
+    ...createVideoSeries(PHOTO_COUNTS.video)
   ];
 
   const featuredMemories = [
-    { title: "First Hostel Night", text: "Nobody knew each other properly, but somehow the conversations started." },
-    { title: "Mess Table Stories", text: "Food was not always good, but the table was always full of stories." },
-    { title: "Assignment Deadline", text: "One laptop, five people, no sleep, and full confidence until submission." },
-    { title: "Festival in Hostel", text: "We were away from home, so we created our own version of home." },
-    { title: "Farewell Silence", text: "The loudest people became quiet when it was time to leave." }
+    { title: "Corridor Gang", text: "The corridor was never just a corridor. It was our meeting point, discussion room, comedy stage, and stress-relief zone." },
+    { title: "Birthday Night", text: "Hostel birthdays were loud, chaotic, imperfect, and somehow more special than any planned celebration." },
+    { title: "Farewell Frames", text: "The farewell pictures carried smiles, but everyone knew a chapter was closing." },
+    { title: "Function Days", text: "Events and functions brought everyone together beyond branches, schedules, and assignments." },
+    { title: "Hostel Induction", text: "The first few photos captured strangers who would soon become part of each other's everyday life." },
+    { title: "Video Memories", text: "Some memories need movement, voices, and background noise to feel complete again." }
   ];
 
   let currentFeatured = 0;
   let isMusicPlaying = false;
+  let heroIndex = 0;
 
   function initIntro() {
     const intro = $("#introScreen");
@@ -75,6 +269,35 @@
     });
   }
 
+  function initHeroRotator() {
+    const cards = $$(".photo-stack .stack-card");
+    if (!cards.length || !HERO_PHOTOS.length) return;
+
+    function setHeroCards() {
+      cards.forEach((card, cardIndex) => {
+        const memory = HERO_PHOTOS[(heroIndex + cardIndex) % HERO_PHOTOS.length];
+        const image = $("img", card);
+        const caption = $("figcaption", card);
+
+        if (image) {
+          image.src = memory.src;
+          image.alt = memory.caption;
+        }
+
+        if (caption) caption.textContent = memory.caption;
+      });
+    }
+
+    setHeroCards();
+
+    if (HERO_PHOTOS.length > cards.length) {
+      setInterval(() => {
+        heroIndex = (heroIndex + 1) % HERO_PHOTOS.length;
+        setHeroCards();
+      }, 3600);
+    }
+  }
+
   function initMusic() {
     const music = $("#bgMusic");
     const musicBtn = $("#musicBtn");
@@ -102,6 +325,7 @@
   function createMediaCard(item) {
     const card = document.createElement("article");
     card.className = "media-card";
+    if (item.fit === "contain") card.classList.add("contain");
     card.dataset.category = item.category;
     card.dataset.type = item.type;
 
@@ -116,7 +340,7 @@
 
     const badge = document.createElement("span");
     badge.className = "media-badge";
-    badge.textContent = item.type === "video" ? "Video" : item.category;
+    badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
 
     const caption = document.createElement("div");
     caption.className = "media-caption";
@@ -135,6 +359,20 @@
     card.appendChild(caption);
     card.addEventListener("click", () => openModal(item));
     return card;
+  }
+
+  function getCategoryLabel(category) {
+    const labels = {
+      hero: "Hero",
+      corridor: "Corridor",
+      birthday: "Birthday",
+      farewell: "Farewell",
+      function: "Function",
+      induction: "Induction",
+      video: "Video"
+    };
+
+    return labels[category] || category;
   }
 
   function renderGallery(filter = "all") {
@@ -268,6 +506,7 @@
     initIntro();
     initNavigation();
     initReveal();
+    initHeroRotator();
     initMusic();
     initFilters();
     initModal();
