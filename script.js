@@ -169,6 +169,14 @@
     return textMap[category] || caption;
   }
 
+  function updateTotalMediaCount() {
+  const totalMediaCount = $("#totalMediaCount");
+
+  if (!totalMediaCount) return;
+
+  totalMediaCount.textContent = `${mediaItems.length}+`;
+}
+  
   const HERO_PHOTOS = Array.from({ length: PHOTO_COUNTS.hero }, (_, index) => {
     const number = index + 1;
 
@@ -711,5 +719,6 @@
     initModal();
     initFeatured();
     initMemoryNotes();
+    updateTotalMediaCount();
   });
 })();
