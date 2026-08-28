@@ -427,65 +427,83 @@
   }
 
   function createMediaCard(item) {
-    const card = document.createElement("article");
-    card.className = "media-card";
+  const card = document.createElement("article");
+  card.className = "media-card";
 
-    if (item.fit === "contain") {
-      card.classList.add("contain");
-    }
+  if (item.fit === "contain") {
+    card.classList.add("contain");
+  }
 
-    card.dataset.category = item.category;
-    card.dataset.type = item.type;
+  card.dataset.category = item.category;
+  card.dataset.type = item.type;
 
-    const thumb = document.createElement("img");
+  let thumb;
+
+  if (item.type === "video") {
+    thumb = document.createElement("div");
+    thumb.className = "media-thumb video-thumb";
+    thumb.style.backgroundImage = `url("${item.poster}")`;
+
+    const videoLabel = document.createElement("span");
+    videoLabel.className = "video-thumb-label";
+    videoLabel.textContent = "Hostel Video";
+
+    thumb.appendChild(videoLabel);
+
+    const testImage = new Image();
+    testImage.src = item.poster;
+
+    testImage.onerror = () => {
+      thumb.style.backgroundImage = "none";
+      thumb.classList.add("no-poster");
+    };
+  } else {
+    thumb = document.createElement("img");
     thumb.className = "media-thumb";
     thumb.loading = "lazy";
     thumb.alt = item.title;
-    thumb.src = item.type === "video"
-      ? item.poster || "assets/placeholders/hostel-video.svg"
-      : item.src;
+    thumb.src = item.src;
 
     thumb.addEventListener("error", () => {
       if (thumb.dataset.fallbackApplied === "true") return;
 
       thumb.dataset.fallbackApplied = "true";
-      thumb.src = item.type === "video"
-        ? "assets/placeholders/hostel-video.svg"
-        : "assets/placeholders/hostel-photo.svg";
+      thumb.src = "assets/placeholders/hostel-photo.svg";
     });
-
-    const badge = document.createElement("span");
-    badge.className = "media-badge";
-    badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
-
-    const caption = document.createElement("div");
-    caption.className = "media-caption";
-
-    const title = document.createElement("h3");
-    title.textContent = item.title;
-
-    const text = document.createElement("p");
-    text.textContent = item.text;
-
-    caption.appendChild(title);
-    caption.appendChild(text);
-
-    card.appendChild(thumb);
-    card.appendChild(badge);
-
-    if (item.type === "video") {
-      const play = document.createElement("span");
-      play.className = "play-badge";
-      play.textContent = "▶";
-      card.appendChild(play);
-    }
-
-    card.appendChild(caption);
-    card.addEventListener("click", () => openModal(item));
-
-    return card;
   }
 
+  const badge = document.createElement("span");
+  badge.className = "media-badge";
+  badge.textContent = item.type === "video" ? "Video" : getCategoryLabel(item.category);
+
+  const caption = document.createElement("div");
+  caption.className = "media-caption";
+
+  const title = document.createElement("h3");
+  title.textContent = item.title;
+
+  const text = document.createElement("p");
+  text.textContent = item.text;
+
+  caption.appendChild(title);
+  caption.appendChild(text);
+
+  card.appendChild(thumb);
+  card.appendChild(badge);
+
+  if (item.type === "video") {
+    const play = document.createElement("span");
+    play.className = "play-badge";
+    play.textContent = "▶";
+    card.appendChild(play);
+  }
+
+  card.appendChild(caption);
+  card.addEventListener("click", () => openModal(item));
+
+  return card;
+}
+  
   function getCategoryLabel(category) {
     const labels = {
       hero: "Hero",
