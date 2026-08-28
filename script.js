@@ -538,6 +538,34 @@
     });
   }
 
+  function renderRandomPhotos() {
+  const randomGrid = $("#randomPhotoGrid");
+
+  if (!randomGrid) return;
+
+  const photosOnly = mediaItems.filter((item) => item.type === "photo");
+
+  const shuffledPhotos = [...photosOnly].sort(() => Math.random() - 0.5);
+
+  const selectedPhotos = shuffledPhotos.slice(0, 10);
+
+  randomGrid.innerHTML = "";
+
+  selectedPhotos.forEach((item) => {
+    randomGrid.appendChild(createMediaCard(item));
+  });
+}
+
+  function initRandomPhotos() {
+  const shuffleBtn = $("#shufflePhotosBtn");
+
+  renderRandomPhotos();
+
+  if (shuffleBtn) {
+    shuffleBtn.addEventListener("click", renderRandomPhotos);
+  }
+}
+  
   function initFilters() {
     const buttons = $$(".filter-btn");
 
@@ -727,16 +755,16 @@
     renderNotes();
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    initIntro();
-    initNavigation();
-    initReveal();
-    initHeroRotator();
-    initMusic();
-    initFilters();
-    initModal();
-    initFeatured();
-    initMemoryNotes();
-    updateTotalMediaCount();
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  initIntro();
+  initNavigation();
+  initReveal();
+  initHeroRotator();
+  initMusic();
+  initFilters();
+  initModal();
+  initFeatured();
+  initRandomPhotos();
+  initMemoryNotes();
+});
 })();
