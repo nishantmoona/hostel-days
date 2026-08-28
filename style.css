@@ -1035,3 +1035,49 @@ a {
     padding: 40px 22px;
   }
 }
+
+/* ================================
+   Better Video Thumbnail Cards
+================================ */
+
+.video-thumb {
+  width: 100%;
+  height: 310px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background-size: cover;
+  background-position: center;
+  background-color: #101323;
+}
+
+.video-thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 122, 69, 0.35), transparent 35%),
+    linear-gradient(135deg, rgba(93, 63, 211, 0.6), rgba(255, 79, 112, 0.45));
+}
+
+.video-thumb-label {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.video-thumb.no-poster {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 122, 69, 0.45), transparent 35%),
+    linear-gradient(135deg, #101323, #5d3fd3, #ff4f70);
+}
+
+@media (max-width: 680px) {
+  .video-thumb {
+    height: 270px;
+  }
+}
