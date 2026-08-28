@@ -29,7 +29,7 @@
     function: 10,
     induction: 3,
     trip: 10,
-    video: 5
+    video: 6
   };
 
   const heroCaptions = [
@@ -121,7 +121,8 @@
     "A Clip from the Days",
     "Living the Moment",
     "The Bond in Motion",
-    "One More Hostellers Party"
+    "One More Hostellers Party",
+    "Ganesh Chaturthi Vibes: There's No Tomorrow"
   ];
 
   function createPhotoSeries({ category, folder, prefix, count, titlePrefix, captions }) {
