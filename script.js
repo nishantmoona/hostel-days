@@ -22,29 +22,32 @@
   */
 
   const PHOTO_COUNTS = {
-    hero: 10,
+    hero: 13,
     corridor: 7,
     birthday: 10,
     farewell: 13,
     function: 10,
     induction: 3,
-    trip: 10,
+    trip: 13,
     oneLastTrip: 13,
-    video: 12
+    video: 13
   };
 
   const heroCaptions = [
-    "The Beginning",
-    "Hostel Family",
-    "Engineering Days",
-    "Room to Memories",
-    "Same Madness",
-    "Unplanned Moments",
-    "The Hostel Gang",
-    "Late Night Energy",
-    "Days Worth Remembering",
-    "Forever Hostel Days"
-  ];
+  "The Beginning",
+  "Hostel Family",
+  "Engineering Days",
+  "Room to Memories",
+  "Same Madness",
+  "Unplanned Moments",
+  "The Hostel Gang",
+  "Late Night Energy",
+  "Days Worth Remembering",
+  "Forever Hostel Days",
+  "Frames of Friendship",
+  "Our Engineering Chapter",
+  "Hostel Life Forever"
+];
 
   const corridorCaptions = [
     "Corridor Gang",
@@ -104,18 +107,21 @@
     "The Start of Everything"
   ];
 
-  const tripCaptions = [
-    "Trip Diaries",
-    "The Road Gang",
-    "Travel Madness",
-    "Outside Campus Memories",
-    "Unplanned Adventure",
-    "Friends on the Move",
-    "Journey Together",
-    "Hostel Trip Energy",
-    "A Day to Remember",
-    "Forever Trip Memories"
-  ];
+const tripCaptions = [
+  "Trip Diaries",
+  "The Road Gang",
+  "Travel Madness",
+  "Outside Campus Memories",
+  "Unplanned Adventure",
+  "Friends on the Move",
+  "Journey Together",
+  "Hostel Trip Energy",
+  "A Day to Remember",
+  "Forever Trip Memories",
+  "Roads and Laughter",
+  "Travel Bond",
+  "A Trip Worth Keeping"
+];
 
   const oneLastTripCaptions = [
   "One Last Trip",
@@ -145,7 +151,8 @@ const videoCaptions = [
   "The Hostel Gang in Motion",
   "Unplanned Video Memory",
   "Laughs We Still Remember",
-  "A Moving Chapter"
+  "A Moving Chapter",
+  "The Final Hostel Video"
 ];
 
   function createPhotoSeries({ category, folder, prefix, count, titlePrefix, captions }) {
