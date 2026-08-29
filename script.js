@@ -712,38 +712,47 @@ const videoCaptions = [
   }
 
   function initFeatured() {
-    const title = $("#featuredTitle");
-    const text = $("#featuredText");
-    const button = $("#featuredBtn");
-    const randomBtn = $("#randomBtn");
+  const title = $("#featuredTitle");
+  const text = $("#featuredText");
+  const button = $("#featuredBtn");
+  const randomBtn = $("#randomBtn");
 
-    function updateFeatured() {
-      const memory = featuredMemories[currentFeatured];
+  function updateFeatured() {
+    const memory = featuredMemories[currentFeatured];
 
-      if (title) {
-        title.textContent = memory.title;
-      }
-
-      if (text) {
-        text.textContent = memory.text;
-      }
+    if (title) {
+      title.textContent = memory.title;
     }
 
-    function nextFeatured() {
-      currentFeatured = (currentFeatured + 1) % featuredMemories.length;
-      updateFeatured();
+    if (text) {
+      text.textContent = memory.text;
     }
+  }
 
-    if (button) {
-      button.addEventListener("click", nextFeatured);
-    }
-
-    if (randomBtn) {
-      randomBtn.addEventListener("click", nextFeatured);
-    }
-
+  function nextFeatured() {
+    currentFeatured = (currentFeatured + 1) % featuredMemories.length;
     updateFeatured();
   }
+
+  function openRandomMemory() {
+    if (!mediaItems || !mediaItems.length) return;
+
+    const randomIndex = Math.floor(Math.random() * mediaItems.length);
+    const randomMemory = mediaItems[randomIndex];
+
+    openModal(randomMemory);
+  }
+
+  if (button) {
+    button.addEventListener("click", nextFeatured);
+  }
+
+  if (randomBtn) {
+    randomBtn.addEventListener("click", openRandomMemory);
+  }
+
+  updateFeatured();
+}
 
   function initMemoryNotes() {
     const input = $("#memoryInput");
