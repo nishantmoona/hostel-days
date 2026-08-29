@@ -715,7 +715,6 @@ const videoCaptions = [
   const title = $("#featuredTitle");
   const text = $("#featuredText");
   const button = $("#featuredBtn");
-  const randomBtn = $("#randomBtn");
 
   function updateFeatured() {
     const memory = featuredMemories[currentFeatured];
@@ -734,24 +733,24 @@ const videoCaptions = [
     updateFeatured();
   }
 
-  function openRandomMemory() {
-    if (!mediaItems || !mediaItems.length) return;
-
-    const randomIndex = Math.floor(Math.random() * mediaItems.length);
-    const randomMemory = mediaItems[randomIndex];
-
-    openModal(randomMemory);
-  }
-
   if (button) {
     button.addEventListener("click", nextFeatured);
   }
 
-  if (randomBtn) {
-    randomBtn.addEventListener("click", openRandomMemory);
-  }
-
   updateFeatured();
+}
+
+  function initRandomMemoryNavigation() {
+  const randomBtn = $("#randomBtn");
+  const randomSection = $("#random-highlights");
+
+  if (!randomBtn || !randomSection) return;
+
+  randomBtn.addEventListener("click", () => {
+    if (typeof renderRandomPhotos === "function") {
+      renderRandomPhotos();
+    }
+  });
 }
 
   function initMemoryNotes() {
@@ -816,6 +815,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initModal();
   initFeatured();
   initRandomPhotos();
+  initRandomMemoryNavigation();
   initMemoryNotes();
 });
 })();
