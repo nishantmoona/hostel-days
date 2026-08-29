@@ -30,7 +30,7 @@
     induction: 3,
     trip: 10,
     oneLastTrip: 13,
-    video: 6
+    video: 12
   };
 
   const heroCaptions = [
@@ -133,14 +133,20 @@
   "Forever One Last Trip"
 ];
   
-  const videoCaptions = [
-    "Hostel Motion Memory",
-    "A Clip from the Days",
-    "Living the Moment",
-    "The Bond in Motion",
-    "One More Hostellers Party",
-    "Ganesh Chaturthi Vibes: There's No Tomorrow"
-  ];
+const videoCaptions = [
+  "Hostel Motion Memory",
+  "A Clip from the Days",
+  "Living the Moment",
+  "The Bond in Motion",
+  "One More Hostellers Party",
+  "Another Hostel Memory in Motion",
+  "One Last Trip Video",
+  "Forever Hostel Vibes",
+  "The Hostel Gang in Motion",
+  "Unplanned Video Memory",
+  "Laughs We Still Remember",
+  "A Moving Chapter"
+];
 
   function createPhotoSeries({ category, folder, prefix, count, titlePrefix, captions }) {
     return Array.from({ length: count }, (_, index) => {
