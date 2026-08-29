@@ -29,6 +29,7 @@
     function: 10,
     induction: 3,
     trip: 10,
+    oneLastTrip: 13,
     video: 6
   };
 
@@ -116,6 +117,22 @@
     "Forever Trip Memories"
   ];
 
+  const oneLastTripCaptions = [
+  "One Last Trip",
+  "The Final Hostel Ride",
+  "Last Trip Diaries",
+  "Roads Full of Memories",
+  "Hostellers on the Move",
+  "A Journey to Remember",
+  "The Final Adventure",
+  "One More Chapter",
+  "Friends Beyond Campus",
+  "Last Ride Together",
+  "The Batch on Road",
+  "Memories Before Goodbye",
+  "Forever One Last Trip"
+];
+  
   const videoCaptions = [
     "Hostel Motion Memory",
     "A Clip from the Days",
@@ -164,7 +181,8 @@
       farewell: "A frame from the ending we did not want, but the memories stayed with us.",
       function: "One of those college-function moments when everyone came together beyond branches and batches.",
       induction: "The early days when strangers slowly became the hostel family.",
-      trip: "A trip memory from the days when friends, travel, laughter, and chaos became one story."
+      trip: "A trip memory from the days when friends, travel, laughter, and chaos became one story.",
+      oneLastTrip: "A memory from the final trip where hostellers carried friendship, laughter, and one last chapter together."
     };
 
     return textMap[category] || caption;
@@ -250,6 +268,15 @@
       titlePrefix: "Trip Memory",
       captions: tripCaptions
     }),
+
+    ...createPhotoSeries({
+  category: "oneLastTrip",
+  folder: "one-last-trip",
+  prefix: "last-trip",
+  count: PHOTO_COUNTS.oneLastTrip,
+  titlePrefix: "One Last Trip Memory",
+  captions: oneLastTripCaptions
+}),
 
     ...createVideoSeries(PHOTO_COUNTS.video)
   ];
@@ -514,6 +541,7 @@
       function: "Function",
       induction: "Induction",
       trip: "Trip",
+      oneLastTrip: "One Last Trip",
       video: "Video"
     };
 
